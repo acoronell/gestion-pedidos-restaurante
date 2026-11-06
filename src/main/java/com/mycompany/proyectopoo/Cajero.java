@@ -21,5 +21,5 @@ public class Cajero extends Usuario {
      
     private void cobrarPedido() {
         // consulta el estado y generar la factura
-    }
+    } 
 }

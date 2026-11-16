@@ -18,4 +18,7 @@ public class Cocinero extends Usuario{
     
      private void consultarEstadoPedido() {
     }
+    
+     private void consultarPedidosPendientes() {
+    }
 }

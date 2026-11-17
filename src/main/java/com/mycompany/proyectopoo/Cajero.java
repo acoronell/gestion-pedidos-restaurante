@@ -16,13 +16,14 @@ public class Cajero extends Usuario {
         return "";
     }
     
-    private void consultarEstadoPedido() {
+    public void consultarEstadoPedido(String id) {
+        //consulta el estado de un pedido específico
     }
      
-    private void cobrarPedido() {
+    public void cobrarPedido(String id) {
         // consulta el estado y generar la factura
     } 
-    private void cancelarPedido() {
-        // consulta el estado y generar la factura
+    public void consultarPedidoPorCobrar() {
+        // consulta todos los pedidos que están pendientes de pago
     } 
 }

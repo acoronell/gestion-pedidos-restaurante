@@ -16,9 +16,9 @@ public class Cocinero extends Usuario{
         return "";
     }
     
-     private void consultarEstadoPedido() {
+     public void consultarEstadoPedido() {
     }
     
-     private void consultarPedidosPendientes() {
+     public void consultarPedidosPendientes() {
     }
 }

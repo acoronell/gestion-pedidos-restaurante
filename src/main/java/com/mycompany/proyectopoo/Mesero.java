@@ -1,6 +1,8 @@
 
 package com.mycompany.proyectopoo;
 
+import java.util.ArrayList;
+
 public class Mesero extends Usuario {
 
     public Mesero() {
@@ -16,15 +18,24 @@ public class Mesero extends Usuario {
         return "";
     }
 
-    private void registrarPedido() {
+    public void registrarPedido(Pedido pedido) {
     }
 
-    private void modificarOCancelarPedido() {
+    public void modificarPedido(String id, ArrayList<DetallePedido> detalles){
+    }
+    
+    public void CancelarPedido(String id) {
     }
 
-    private void actualizarEstadoPedido() {
+    public void actualizarEstadoPedido(String id, EstadoPedido estado) {
     }
 
-    private void consultarEstadoPedido() {
+    public void consultarEstadoPedido(String id) {
+    }
+    
+    public void consultarPedido(String id){
+    }
+    
+    public void consultarMenu(){
     }
 }

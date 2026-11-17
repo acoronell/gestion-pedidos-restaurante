@@ -16,12 +16,15 @@ public class Administrador extends Usuario {
         return "";
     }
     
-    private void añadirPlato() {
+    public void añadirPlato() {
     }
 
-    private void modificarPlato() {
+    public void modificarPlato() {
     }
 
-    private void eliminarPlato() {
+    public void eliminarPlato() {
+    }
+    
+    public void consultarMenu() {
     }
 }

@@ -2,5 +2,5 @@
 package com.mycompany.proyectopoo;
 
 public enum EstadoPedido {
-    EnPreparacion, Pendiente, Listo, Pagado, Cancelado
+    Pendiente, EnPreparacion, Listo, Entregado, PendienteDePago,Pagado, Cancelado
 }

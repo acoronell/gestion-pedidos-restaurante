@@ -1,6 +1,8 @@
 
 package com.mycompany.proyectopoo;
 
+import javax.swing.JOptionPane;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -16,6 +18,45 @@ public class Main {
         restaurante.registrarUsuario(cocinero);
         restaurante.registrarUsuario(administrador);
         restaurante.registrarUsuario(cajero);
+        
+        //login
+        Usuario usuario = null;
+        
+        while (usuario == null){
+            String user = JOptionPane.showInputDialog("Usuario");
+            if (user == null){
+                return;
+            }
+            
+            String password = JOptionPane.showInputDialog("Contraseña");
+            if (password == null){
+                return;
+            }
+            
+            usuario = restaurante.IniciarSesion(user, password);
+            
+            if (usuario == null){
+                JOptionPane.showMessageDialog(null, "Usuairo o contraseña incorrectos");
+            }
+            
+        } 
+        
+        //menu segun el rol de la persona que inicio sesion
+        
+        JOptionPane.showMessageDialog(null, "Bienvenido " + usuario.getNombre());
+        
+        String op = "";
+        while (!op.equals("0")) {
+            op = JOptionPane.showInputDialog(usuario.mostrarMenuOpciones());
+
+            if (op == null) {
+                return;
+            }
+
+            if (op.equals("0")) {
+                JOptionPane.showMessageDialog(null, "Sesión cerrada.");
+            } 
+}
         
         //buscar usuario
         Usuario encontrado = restaurante.buscarUsuario("001");

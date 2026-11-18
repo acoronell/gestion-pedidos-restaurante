@@ -22,8 +22,9 @@ public class Cajero extends Usuario {
      
     public void cobrarPedido(String id) {
         // consulta el estado y generar la factura
-    } 
+    }
+
     public void consultarPedidoPorCobrar() {
         // consulta todos los pedidos que están pendientes de pago
-    } 
+    }
 }

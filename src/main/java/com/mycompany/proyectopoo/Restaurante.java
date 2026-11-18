@@ -17,8 +17,9 @@ public class Restaurante {
         todosLosPedidos = new ArrayList<>();
     }
     
-    public void IniciarSesion(String user, String password){
+    public Usuario IniciarSesion(String user, String password){
         //COMPLETAR CUANDO SE CONECTE A LA BASE DE DATOS!!!
+        return null;
     }
     
     public void registrarUsuario(Usuario usuario) {

@@ -38,13 +38,24 @@ public class Restaurante {
     }
     
     public void eliminarUsuario(String id) {
-    Usuario usuario = buscarUsuario(id);
+        Usuario usuario = buscarUsuario(id);
 
-    if (usuario != null) {
-        usuarios.remove(usuario);
+        if (usuario != null) {
+            usuarios.remove(usuario);
+        }
     }
-  }
     
+    public String listarMenu() {
+        if (menu.isEmpty()) {
+            return "El menu esta vacio";
+        }
+        String texto = "Menu\n\n";
+        for (Plato p : menu) {
+            texto += p.getId() + " - " + p.getNombre() + " (" + p.getCategoria() + ") $" + p.getPrecio() + "\n";
+        }
+        return texto;
+    }
+   
     public void agregarPlato(Plato plato) {
         menu.add(plato);
     }

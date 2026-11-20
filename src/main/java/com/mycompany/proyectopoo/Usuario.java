@@ -50,5 +50,6 @@ public abstract class Usuario {
     }
     
     public abstract String mostrarMenuOpciones();
-            
+    
+    public abstract void ejecutarOpcion(int opcion, Restaurante restaurante);
 }

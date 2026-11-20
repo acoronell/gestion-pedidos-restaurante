@@ -54,7 +54,7 @@ public class Main {
             }
 
             if (op.equals("0")) {
-                JOptionPane.showMessageDialog(null, "Sesión cerrada.");
+                JOptionPane.showMessageDialog(null, "Sesion cerrada.");
             } 
 }
         

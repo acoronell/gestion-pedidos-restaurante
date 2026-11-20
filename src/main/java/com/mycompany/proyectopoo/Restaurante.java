@@ -99,6 +99,10 @@ public class Restaurante {
         return todosLosPedidos;
     }
     
+    public LinkedList<Pedido> getPedidosPendientes() {
+        return pedidosPendientes;
+    }
+    
     public void quitarDePendientes(Pedido pedido) {
         pedidosPendientes.remove(pedido);
     }

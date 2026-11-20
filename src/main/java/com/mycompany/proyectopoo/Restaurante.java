@@ -94,7 +94,11 @@ public class Restaurante {
         }
         return null;
     }
-
+    
+    public ArrayList<Pedido> getTodosLosPedidos() {
+        return todosLosPedidos;
+    }
+    
     public void quitarDePendientes(Pedido pedido) {
         pedidosPendientes.remove(pedido);
     }

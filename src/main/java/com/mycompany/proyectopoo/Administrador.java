@@ -132,14 +132,6 @@ public class Administrador extends Usuario {
     }
     
     public void consultarMenu(Restaurante restaurante) {
-        if (restaurante.getMenu().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "el menu esta vacio");
-            return;
-        }
-        String texto = "Menu\n\n";
-        for (Plato p : restaurante.getMenu()) {
-            texto += p.getId() + " - " + p.getNombre() + " (" + p.getCategoria() + ") $" + p.getPrecio() + "\n";
-        }
-        JOptionPane.showMessageDialog(null, texto);
-    }
+        JOptionPane.showMessageDialog(null, restaurante.listarMenu());
+    }    
 }

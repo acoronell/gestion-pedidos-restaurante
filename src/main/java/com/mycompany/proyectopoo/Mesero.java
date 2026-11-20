@@ -179,7 +179,7 @@ public class Mesero extends Usuario {
     }
     
     public void consultarMenu(Restaurante restaurante){
-       
+      JOptionPane.showMessageDialog(null, restaurante.listarMenu());
     }
     
     private Pedido armarPedido(Restaurante restaurante) {

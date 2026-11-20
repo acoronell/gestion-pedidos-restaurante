@@ -12,6 +12,14 @@ public class Pedido {
     public Pedido() {
     }
 
+    public Pedido(String id, int mesa) {
+        this.id = id;
+        this.mesa = mesa;
+        this.detalles = new ArrayList<>();
+    }
+    
+    
+    
     public Pedido(String id, int mesa, EstadoPedido estado, ArrayList<DetallePedido> detalles) {
         this.id = id;
         this.mesa = mesa;
@@ -52,7 +60,7 @@ public class Pedido {
     }
     
     public void agregarDetalle(DetallePedido detalle) {
-        detalle.add(detalle);
+        detalles.add(detalle);
     }
 
     public double calcularTotal() {

@@ -12,8 +12,16 @@ public class Administrador extends Usuario {
     
     @Override
     public String mostrarMenuOpciones() {
-        // despliegue de opciones disponibles como admin
-        return "";
+        return "Menu administrador\n"
+                + "1. Añadir plato\n"
+                + "2. Modificar plato\n"
+                + "3. Eliminar plato\n"
+                + "4. Consultar plato\n"
+                + "5. Consultar menu\n"
+                + "6. Consultar pedido"
+                + "7. Consultar menu"
+                + "8. Salir";
+    }
     }
     
     public void añadirPlato() {

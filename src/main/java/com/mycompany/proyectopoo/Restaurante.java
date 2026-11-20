@@ -58,6 +58,18 @@ public class Restaurante {
         return null;
     }
     
+    public void eliminarPlato(String id) {
+        Plato plato = buscarPlato(id);
+
+        if (plato != null) {
+            menu.remove(plato);
+        }
+    }
+    
+    public ArrayList<Plato> getMenu() {
+        return menu;
+    }
+    
     public void agregarPedido(Pedido pedido) {
         todosLosPedidos.add(pedido);
         pedidosPendientes.add(pedido);

@@ -8,6 +8,7 @@ public class Restaurante {
     private ArrayList<Plato> menu;
     private LinkedList<Pedido> pedidosPendientes;
     private ArrayList<Pedido> todosLosPedidos;
+    private int contadorPedidos = 0;
 
     // para que no genere excepciones
     public Restaurante() {
@@ -43,5 +44,28 @@ public class Restaurante {
         usuarios.remove(usuario);
     }
   }
+    
+    public void agregarPedido(Pedido pedido) {
+        todosLosPedidos.add(pedido);
+        pedidosPendientes.add(pedido);
+    }
+
+    public Pedido buscarPedido(String id) {
+        for (Pedido p : todosLosPedidos) {
+            if (p.getId().equals(id)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void quitarDePendientes(Pedido pedido) {
+        pedidosPendientes.remove(pedido);
+    }
+
+    public String generarIdPedido() {
+        contadorPedidos++;
+        return "PED" + contadorPedidos;
+    }
 }   
 

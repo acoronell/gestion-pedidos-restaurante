@@ -15,6 +15,8 @@ public class Cajero extends Usuario {
         // despliegue de opciones disponibles como cajero
         return "";
     }
+    @Override
+    public abstract void ejecutarOpcion(int opcion, Restaurante restaurante);
     
     public void consultarEstadoPedido(String id) {
         //consulta el estado de un pedido específico

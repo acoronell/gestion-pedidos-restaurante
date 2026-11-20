@@ -16,6 +16,9 @@ public class Cocinero extends Usuario{
         return "";
     }
     
+    @Override
+    public abstract void ejecutarOpcion(int opcion, Restaurante restaurante);
+    
      public void consultarEstadoPedido() {
     }
     

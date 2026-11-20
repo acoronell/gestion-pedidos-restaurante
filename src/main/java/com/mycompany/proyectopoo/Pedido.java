@@ -52,12 +52,18 @@ public class Pedido {
     }
     
     public void agregarDetalle(DetallePedido detalle) {
+        detalle.add(detalle);
     }
 
     public double calcularTotal() {
-        return 0.0;
+        double total = 0;
+        for (DetallePedido d: detalles){
+            total+= d.calcularSubtotal();
+        }
+        return total;
     }
 
-    public void cambiarEstado(EstadoPedido estado) {
+    public void cambiarEstado(EstadoPedido nuevoEstado) {
+        estado = nuevoEstado;
     }
 }

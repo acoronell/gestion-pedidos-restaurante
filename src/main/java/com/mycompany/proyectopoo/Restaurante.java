@@ -45,6 +45,19 @@ public class Restaurante {
     }
   }
     
+    public void agregarPlato(Plato plato) {
+        menu.add(plato);
+    }
+    
+    public Plato buscarPlato(String id) {
+        for (Plato p : menu) {
+            if (p.getId().equals(id)) {
+                return p;
+            }
+        }
+        return null;
+    }
+    
     public void agregarPedido(Pedido pedido) {
         todosLosPedidos.add(pedido);
         pedidosPendientes.add(pedido);

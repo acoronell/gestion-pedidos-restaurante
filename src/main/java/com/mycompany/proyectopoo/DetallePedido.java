@@ -14,7 +14,7 @@ public class DetallePedido {
     }
    
     public double calcularSubtotal() {
-        return 0; // cantidad por precio del plato
+        return plato.getPrecio() * cantidad; // cantidad por precio del plato
     }
 
     public Plato getPlato() {
@@ -24,6 +24,6 @@ public class DetallePedido {
     public int getCantidad() {
         return cantidad;
     }
-   
+
 }
 

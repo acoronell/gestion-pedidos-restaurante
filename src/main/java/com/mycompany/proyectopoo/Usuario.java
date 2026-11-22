@@ -49,6 +49,8 @@ public abstract class Usuario {
         this.user = user;
     }
     
+    public abstract int getOpcionSalir();
+    
     public abstract String mostrarMenuOpciones();
     
     public abstract void ejecutarOpcion(int opcion, Restaurante restaurante);

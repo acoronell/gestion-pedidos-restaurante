@@ -18,9 +18,15 @@ public class Conexion {
         con = DriverManager.getConnection(URL, "root", "root");
     }
     
+    public static Connection getConexion() {
+        return con;
+    }
+    
     // Cerrar la conexión
     public static void cerrarConexion() throws SQLException {
-        con.close();
-        con = null;
+       if (con != null && !con.isClosed()) {
+            con.close();
+            con = null;
+        }
     }
 }

@@ -59,11 +59,11 @@ public class Cajero extends Usuario {
             JOptionPane.showMessageDialog(null, "pedido no encontrado.");
             return;
         }
-        if (pedido.getEstado() == EstadoPedido.Pagado) {
+        if (pedido.getEstado() == EstadoPedido.PAGADO) {
             JOptionPane.showMessageDialog(null, "este pedido ya fue pagado");
             return;
         }
-        if (pedido.getEstado() != EstadoPedido.Listo) {
+        if (pedido.getEstado() != EstadoPedido.PENDIENTE_DE_PAGO) {
             JOptionPane.showMessageDialog(null,
                     "este pedido aun no se puede cobrar. Estado actual: " + pedido.getEstado());
             return;
@@ -85,11 +85,13 @@ public class Cajero extends Usuario {
         } 
         
         else {
-            JOptionPane.showMessageDialog(null, "Opcion no valida");
+            JOptionPane.showMessageDialog(null, "opcion no valida");
             return;
         }
 
-        pedido.cambiarEstado(EstadoPedido.Pagado);
+        if (!restaurante.actualizarEstado(id, EstadoPedido.PAGADO)) {
+                    return;
+                }
 
         String factura = "factura\n"
                 + "Pedido: " + pedido.getId() + "   Mesa: " + pedido.getMesa() + "\n\n";
@@ -106,16 +108,19 @@ public class Cajero extends Usuario {
     public void consultarPedidoPorCobrar(Restaurante restaurante) {
         String texto = "";
 
-        for (Pedido p : restaurante.getTodosLosPedidos()) {
-            if (p.getEstado() == EstadoPedido.PendienteDePago) {
-            texto += p.getId() + " - Mesa " + p.getMesa()
+        for (Pedido p : restaurante.getPedidosPorEstado(EstadoPedido.PENDIENTE_DE_PAGO)) {
+            texto += p.getId() + " - mesa " + p.getMesa()
                     + " - $" + p.calcularTotal() + "\n";
-            }
         }
 
         if (texto.isEmpty()) {
-            texto = "No hay pedidos por cobrar.";
+            texto = "no hay pedidos por cobrar";
         }
-    JOptionPane.showMessageDialog(null, "Pedidos por cobrar: " + texto);    
+        JOptionPane.showMessageDialog(null, "Pedidos por cobrar:\n" + texto);
+    }
+
+    @Override
+    public int getOpcionSalir() {
+        return 4;
     }
 }

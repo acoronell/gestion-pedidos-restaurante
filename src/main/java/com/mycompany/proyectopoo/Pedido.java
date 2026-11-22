@@ -15,6 +15,7 @@ public class Pedido {
     public Pedido(String id, int mesa) {
         this.id = id;
         this.mesa = mesa;
+        this.estado = EstadoPedido.PENDIENTE;
         this.detalles = new ArrayList<>();
     }
     

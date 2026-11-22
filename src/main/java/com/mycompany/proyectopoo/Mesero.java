@@ -21,8 +21,8 @@ public class Mesero extends Usuario {
                 + "3. Cancelar pedido\n"
                 + "4. Actualizar estado del pedido\n"
                 + "5. Consultar estado del pedido\n"
-                + "6. Consultar pedido"
-                + "7. Consultar menu"
+                + "6. Consultar pedido\n"
+                + "7. Consultar menu\n"
                 + "8. Salir";
     }
     
@@ -56,19 +56,28 @@ public class Mesero extends Usuario {
         
         else if (opcion == 4){
             String id = JOptionPane.showInputDialog("Id del pedido: ");
-            String nuevo = JOptionPane.showInputDialog("Nuevo estado: \n1. En preparación\n2. Listo");
-            if (id != null && nuevo != null) {
+            if (id == null) {
+                return;
+            }
+            String nuevo = JOptionPane.showInputDialog("Nuevo estado: \n1. En preparación\n2. Listo\n3. Entregado\n4. Pendiente de pago");
+            if (nuevo != null) {
                 if (nuevo.equals("1")) {
-                    actualizarEstadoPedido(restaurante, id, EstadoPedido.EnPreparacion);
-                } 
+                    actualizarEstadoPedido(restaurante, id, EstadoPedido.EN_PREPARACION);
+                }
                 else if (nuevo.equals("2")) {
-                    actualizarEstadoPedido(restaurante, id, EstadoPedido.Listo);
-                } 
+                    actualizarEstadoPedido(restaurante, id, EstadoPedido.LISTO);
+                }
+                else if (nuevo.equals("3")) {
+                    actualizarEstadoPedido(restaurante, id, EstadoPedido.ENTREGADO);
+                }
+                else if (nuevo.equals("4")) {
+                    actualizarEstadoPedido(restaurante, id, EstadoPedido.PENDIENTE_DE_PAGO);
+                }
                 else {
                     JOptionPane.showMessageDialog(null, "Opcion no valida");
                 }
             }
-        }  
+        } 
         
         else if (opcion == 5){
             String id = JOptionPane.showInputDialog("Id del pedido: ");
@@ -88,61 +97,52 @@ public class Mesero extends Usuario {
             consultarMenu(restaurante);
         }
     }
-        
                 
     public void registrarPedido(Restaurante restaurante, Pedido pedido) {
-        restaurante.agregarPedido(pedido);
-        JOptionPane.showMessageDialog(null, "Pedido "+pedido.getId()+ "resgitado \n Total: " +pedido.calcularTotal());
+        if (restaurante.agregarPedido(pedido)) {
+            JOptionPane.showMessageDialog(null, "Pedido " + pedido.getId() + " registrado\nTotal: $" + pedido.calcularTotal());
+        }
     }
 
     public void modificarPedido(Restaurante restaurante, String id, ArrayList<DetallePedido> detalles){
         Pedido pedido = restaurante.buscarPedido(id);
-        
+
         if (pedido == null){
             JOptionPane.showMessageDialog(null, "pedido no encontrado");
         }
-        
-        else if(pedido.getEstado() != EstadoPedido.Pendiente){
+        else if(pedido.getEstado() != EstadoPedido.PENDIENTE){
             JOptionPane.showMessageDialog(null, "solo se pueden modificar pedidos pendientes");
         }
-        
-        else{
-            JOptionPane.showMessageDialog(null, "pedido modificado. El total ahora es de: "+pedido.calcularTotal());
+        else if (restaurante.modificarDetalles(id, detalles)) {
+            pedido.setDetalles(detalles);
+            JOptionPane.showMessageDialog(null, "pedido modificado. El total ahora es de: $" + pedido.calcularTotal());
         }
     }
-    
+
     public void CancelarPedido(Restaurante restaurante, String id) {
         Pedido pedido = restaurante.buscarPedido(id);
-        
+
         if (pedido == null){
             JOptionPane.showMessageDialog(null, "pedido no encontrado");
         }
-        
-        else if(pedido.getEstado() != EstadoPedido.Pendiente){
-            JOptionPane.showMessageDialog(null, "solo se pueden modificar pedidos pendientes");
+        else if(pedido.getEstado() != EstadoPedido.PENDIENTE){
+            JOptionPane.showMessageDialog(null, "solo se pueden cancelar pedidos pendientes");
         }
-        
-        else{
-            pedido.cambiarEstado(EstadoPedido.Cancelado);
-            restaurante.quitarDePendientes(pedido);
+        else if (restaurante.actualizarEstado(id, EstadoPedido.CANCELADO)) {
             JOptionPane.showMessageDialog(null, "pedido cancelado");
         }
     }
 
     public void actualizarEstadoPedido(Restaurante restaurante, String id, EstadoPedido estado) {
         Pedido pedido = restaurante.buscarPedido(id);
-        
+
         if (pedido == null){
             JOptionPane.showMessageDialog(null, "pedido no encontrado");
         }
-        
-        else if(pedido.getEstado() == EstadoPedido.Cancelado || pedido.getEstado() == EstadoPedido.Pagado) {
+        else if(pedido.getEstado() == EstadoPedido.CANCELADO || pedido.getEstado() == EstadoPedido.PAGADO) {
             JOptionPane.showMessageDialog(null, "ya no se pueden hacer cambios de estado sobre este pedido");
         }
-        
-        else {
-            pedido.cambiarEstado(estado);
-            restaurante.quitarDePendientes(pedido);
+        else if (restaurante.actualizarEstado(id, estado)) {
             JOptionPane.showMessageDialog(null, "estado cambiado a: " + estado);
         }
     }
@@ -167,7 +167,7 @@ public class Mesero extends Usuario {
             return;
         }
         
-        String texto = "Pedido " + pedido.getId() + "-Mesa " + pedido.getMesa()
+        String texto = "pedido " + pedido.getId() + "-mesa " + pedido.getMesa()
                 + "\nEstado: " + pedido.getEstado() + "\n\n";
         for (DetallePedido d : pedido.getDetalles()) {
             texto += d.getCantidad() + " x " + d.getPlato().getNombre()
@@ -237,9 +237,14 @@ public class Mesero extends Usuario {
                     JOptionPane.showMessageDialog(null, "la cantidad debe ser un numero");
                 }
             }
-            otro = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro plato?",
-                    "Pedido", JOptionPane.YES_NO_OPTION);
+            otro = JOptionPane.showConfirmDialog(null, "Desea agregar otro plato?",
+                    "pedido", JOptionPane.YES_NO_OPTION);
         }
         return detalles;
+    }
+
+    @Override
+    public int getOpcionSalir() {
+        return 8;
     }
 }
